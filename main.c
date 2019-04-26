@@ -6,13 +6,12 @@
 /*   By: vlambert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 09:38:58 by vlambert          #+#    #+#             */
-/*   Updated: 2019/04/15 16:39:20 by vlambert         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:12:06 by vlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 static void	init(t_all *all)
 {
@@ -21,8 +20,6 @@ static void	init(t_all *all)
 	all->str = ft_strnew(0);
 	all->end = NULL;
 	all->start = NULL;
-	all->map_size = 0;
-	all->tab = NULL;
 	all->new_score = 0.0;
 	all->sol = NULL;
 	all->queue = NULL;
@@ -96,8 +93,6 @@ int			main(void)
 
 	init(&all);
 	ft_parsroom(&all);
-	if (all.end)
-		all.end->col = all.map_size - 1;
 	if (!(oneway(all.start, &all)))
 	{
 		ft_printoneway(all.ants, all.end, &all);

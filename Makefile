@@ -6,16 +6,19 @@
 #    By: vlambert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/07 14:36:18 by vlambert          #+#    #+#              #
-#    Updated: 2019/04/15 11:38:44 by ayguillo         ###   ########.fr        #
+#    Updated: 2019/04/19 10:03:02 by ayguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= lem-in
-DEBUG = -g3 -fsanitize=address
-FLAGS = -Wall -Wextra -Werror -g3
+
+FLAGS = -Wall -Wextra -Werror
+
 SRC = 	main.c parsepipe.c parsroom.c tools.c ft_error.c create_sol.c bfs.c \
 		freeall.c printsol.c printline.c
+
 OBJ = $(SRC:.c=.o)
+
 LIB = libft/libft.a
 
 all: $(NAME) 

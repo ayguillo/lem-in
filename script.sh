@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 16:59:32 by ayguillo          #+#    #+#              #
-#    Updated: 2019/04/15 17:04:10 by ayguillo         ###   ########.fr        #
+#    Updated: 2019/04/19 16:42:47 by ayguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,18 +54,20 @@ fi
 
 tot=0
 
+
 if [ $map = "flow-one" ]
 then
 	for i in `seq 1 $nb`;
 	do
 		./generator --flow-one > flowonetest
+		debut=`date +%s`
 		nbline=`cat flowonetest | wc -l`
 		./lem-in < flowonetest > flowoneret
 		nblineret=`cat flowoneret | wc -l`
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowonetest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -lt "-10" ]
+		if [ "$nblinediff" -le "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -82,7 +84,12 @@ then
 			cat flowonetest > flowonedifficult$i
 		fi
 		tot=$(($tot+$nblinediff))
-		sleep 1
+		fin=`date +%s`
+		time=$(($fin-$debut))
+		if [ $time -lt "1" ]
+		then
+			sleep 1
+		fi
 	done
 	echo -e "\n\033[035mMoyenne = \c "
 	awk "BEGIN {print ${tot}/${nb}}"
@@ -97,13 +104,14 @@ then
 	for i in `seq 1 $nb`;
 	do
 		./generator --flow-ten > flowtentest
+		debut=`date +%s`
 		nbline=`cat flowtentest | wc -l`
 		./lem-in < flowtentest > flowtenret
 		nblineret=`cat flowtenret | wc -l`
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowtentest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -lt "-10" ]
+		if [ "$nblinediff" -le "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -120,7 +128,12 @@ then
 			cat flowtentest > flowtendifficult$i
 		fi
 		tot=$(($tot+$nblinediff))
-		sleep 1
+		fin=`date +%s`
+		time=$(($fin-$debut))
+		if [ $time -lt "1" ]
+		then
+			sleep 1
+		fi
 	done
 	echo -e "\n\033[035mMoyenne = \c "
 	awk "BEGIN {print ${tot}/${nb}}"
@@ -135,13 +148,14 @@ then
 	for i in `seq 1 $nb`;
 	do
 		./generator --flow-thousand > flowthousandtest
+		debut=`date +%s`
 		nbline=`cat flowthousandtest | wc -l`
 		./lem-in < flowthousandtest > flowthousandret
 		nblineret=`cat flowthousandret | wc -l`
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowthousandtest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -lt "-10" ]
+		if [ "$nblinediff" -le "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -158,6 +172,12 @@ then
 			cat flowthousandtest > flowthousanddifficult$i
 		fi
 		tot=$(($tot+$nblinediff))
+		fin=`date +%s`
+		time=$(($fin-$debut))
+		if [ $time -lt "1" ]
+		then
+			sleep $((1-$time))
+		fi
 		sleep 1
 	done
 	echo -e "\n\033[035mMoyenne = \c "
@@ -173,13 +193,14 @@ then
 	for i in `seq 1 $nb`;
 	do
 		./generator --big > bigtest
+		debut=`date +%s`
 		nbline=`cat bigtest | wc -l`
 		./lem-in < bigtest > bigret
 		nblineret=`cat bigret | wc -l`
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " bigtest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -lt "-10" ]
+		if [ "$nblinediff" -le "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -196,7 +217,12 @@ then
 			cat bigtest > bigdifficult$i
 		fi
 		tot=$(($tot+$nblinediff))
-		sleep 0.4
+		fin=`date +%s`
+		time=$(($fin-$debut))
+		if [ $time -lt "1" ]
+		then
+			sleep 1
+		fi
 	done
 	echo -e "\n\033[035mMoyenne = \c "
 	awk "BEGIN {print ${tot}/${nb}}"
@@ -211,13 +237,14 @@ then
 	for i in `seq 1 $nb`;
 	do
 		./generator --big-superposition > bigsuperpositiontest
+		debut=`date +%s`
 		nbline=`cat bigsuperpositiontest | wc -l`
 		./lem-in < bigsuperpositiontest > bigsuperpositionret
 		nblineret=`cat bigsuperpositionret | wc -l`
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " bigsuperpositiontest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -lt "-10" ]
+		if [ "$nblinediff" -le "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -234,7 +261,12 @@ then
 			cat bigsuperpositiontest > bigsuperpositiondifficult$i
 		fi
 		tot=$(($tot+$nblinediff))
-		sleep 0.5
+		fin=`date +%s`
+		time=$(($fin-$debut))
+		if [ $time -lt "1" ]
+		then
+			sleep 1
+		fi
 	done
 	echo -e "\n\033[035mMoyenne = \c "
 	awk "BEGIN {print ${tot}/${nb}}"

@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 11:40:12 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/04/15 11:11:09 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:34:49 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-void			ft_freet2i(int **i)
+void		ft_freet2i(int **i)
 {
-	if (!i)
+	if (!(*i))
 		return ;
 	free(*i);
 	*i = NULL;
 }
 
-void			ft_freesol(t_sol ***sol)
+void		ft_freesol(t_sol ***sol)
 {
 	int i;
 
@@ -39,7 +39,7 @@ void			ft_freesol(t_sol ***sol)
 	(*sol) = NULL;
 }
 
-void			ft_freeall(t_room **room, char **name, char ***tmp)
+void		ft_freeall(t_room **room, char **name, char ***tmp)
 {
 	if (room)
 		free(*room);
@@ -47,4 +47,12 @@ void			ft_freeall(t_room **room, char **name, char ***tmp)
 		ft_free_tab2d(tmp);
 	if (name)
 		ft_strdel(name);
+}
+
+void		ft_del(char *s1, char *s2)
+{
+	if (s1)
+		ft_strdel(&s1);
+	if (s2)
+		ft_strdel(&s2);
 }

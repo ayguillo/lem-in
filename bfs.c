@@ -6,12 +6,11 @@
 /*   By: vlambert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 08:28:04 by vlambert          #+#    #+#             */
-/*   Updated: 2019/04/12 17:06:13 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/04/19 15:47:31 by vlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
-#include "libft/libft.h"
 
 t_room_list	*thread(t_room_list *queue, t_room *room)
 {
