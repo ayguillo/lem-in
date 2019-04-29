@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 11:40:12 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/04/19 16:34:49 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/04/29 11:52:36 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void		ft_freesol(t_sol ***sol)
 
 void		ft_freeall(t_room **room, char **name, char ***tmp)
 {
+	if (name)
+		ft_strdel(name);
 	if (room)
 		free(*room);
 	if (tmp)
 		ft_free_tab2d(tmp);
-	if (name)
-		ft_strdel(name);
 }
 
 void		ft_del(char *s1, char *s2)

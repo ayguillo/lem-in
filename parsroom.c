@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 11:45:43 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/04/19 16:07:02 by vlambert         ###   ########.fr       */
+/*   Updated: 2019/04/29 13:27:03 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-static t_room	*create_room(char **tab, t_room *room)
+static int		create_room(char **tab, t_room *room)
 {
+	room->name = NULL;
 	if ((ft_strchr(tab[0], '-')))
-		return (NULL);
+		return (0);
 	if (!(room->name = ft_strdup(tab[0])))
-		return (NULL);
+		return (0);
 	room->coord[X] = ft_atoi(tab[1]);
 	room->coord[Y] = ft_atoi(tab[2]);
 	room->linked = NULL;
 	room->to_start = 0;
 	room->vu = 0;
-	return (room);
+	return (1);
 }
 
 static t_room	*ft_startend(char *str, t_room *room, t_all *all)
@@ -61,8 +62,7 @@ static int		ft_create(char *line, t_all *all, t_room *room)
 			return (0);
 		return (1);
 	}
-	if (!(room = create_room(tmp, room))
-			|| !(all->map = add_room(all->map, room, TRUE)))
+	if (!create_room(tmp, room) || !(all->map = add_room(all->map, room, TRUE)))
 	{
 		ft_freeall(&room, &(room->name), &tmp);
 		return (0);
