@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 11:45:43 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/04/29 13:27:03 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/05/07 15:16:56 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static int		create_room(char **tab, t_room *room)
 
 static t_room	*ft_startend(char *str, t_room *room, t_all *all)
 {
-	if (!(ft_strcmp(str, "##start")))
+	if (room->state == OTHER && !(ft_strcmp(str, "##start")))
 	{
 		room->state = START;
 		all->start = room;
 	}
-	else if (!(ft_strcmp(str, "##end")))
+	else if (room->state == OTHER && !(ft_strcmp(str, "##end")))
 	{
 		room->state = END;
 		all->end = room;

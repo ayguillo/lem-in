@@ -6,7 +6,7 @@
 #    By: vlambert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 10:47:24 by vlambert          #+#    #+#              #
-#    Updated: 2019/04/19 16:22:55 by vlambert         ###   ########.fr        #
+#    Updated: 2019/05/06 16:04:42 by ayguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME): $(OBJ)
 	@ gcc $(FLAGS) -c $<
 	
 clean:
-	@ rm -rf *.o
+	@ rm -rf $(OBJ)
 	@ echo "\033[0;31mSuppression des .o \033[0;33m-> \033[0;32mOK\x1b[0m"
 
 fclean: clean

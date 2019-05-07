@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,11 +8,9 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 16:59:32 by ayguillo          #+#    #+#              #
-#    Updated: 2019/04/19 16:42:47 by ayguillo         ###   ########.fr        #
+#    Updated: 2019/04/26 17:27:09 by vlambert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#!/bin/bash
 
 if [ -f lem-in ] && [ -f generator ]
 then
@@ -67,7 +67,7 @@ then
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowonetest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -le "-10" ]
+		if [ "$nblinediff" -lt "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -82,6 +82,7 @@ then
 		else
 			echo -e "\033[0;31mWarning ! Difference : $nblinediff\x1b[0m"
 			cat flowonetest > flowonedifficult$i
+			echo -e "\033[0;31mMap saved in flowonedifficult$i\x1b[0m"
 		fi
 		tot=$(($tot+$nblinediff))
 		fin=`date +%s`
@@ -111,7 +112,7 @@ then
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowtentest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -le "-10" ]
+		if [ "$nblinediff" -lt "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -126,6 +127,7 @@ then
 		else
 			echo -e "\033[0;31mWarning ! Difference : $nblinediff\x1b[0m"
 			cat flowtentest > flowtendifficult$i
+			echo -e "\033[0;31mMap saved in flowtendifficult$i\x1b[0m"
 		fi
 		tot=$(($tot+$nblinediff))
 		fin=`date +%s`
@@ -155,7 +157,7 @@ then
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " flowthousandtest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -le "-10" ]
+		if [ "$nblinediff" -lt "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -170,6 +172,7 @@ then
 		else
 			echo -e "\033[0;31mWarning ! Difference : $nblinediff\x1b[0m"
 			cat flowthousandtest > flowthousanddifficult$i
+			echo -e "\033[0;31mMap saved in flowthousanddifficult$i\x1b[0m"
 		fi
 		tot=$(($tot+$nblinediff))
 		fin=`date +%s`
@@ -200,7 +203,7 @@ then
 		nblinetot=$(($nblineret-$nbline - 1))
 		nblinedem=`grep -m 1 "#Here is the number of lines required: " bigtest | rev | cut -d " " -f1 | rev`
 		nblinediff=$(($nblinetot-$nblinedem))
-		if [ "$nblinediff" -le "-10" ]
+		if [ "$nblinediff" -lt "-10" ]
 		then
 			echo -e "\033[0;36mCongratulation ! Difference : $nblinediff\x1b[0m"
 		elif [ "$nblinediff" -lt "0" ] && [ "$nblinediff" -gt "-10" ]
@@ -215,6 +218,7 @@ then
 		else
 			echo -e "\033[0;31mWarning ! Difference : $nblinediff\x1b[0m"
 			cat bigtest > bigdifficult$i
+			echo -e "\033[0;31mMap saved in bigdifficult$i\x1b[0m"
 		fi
 		tot=$(($tot+$nblinediff))
 		fin=`date +%s`
@@ -259,6 +263,7 @@ then
 		else
 			echo -e "\033[0;31mWarning ! Difference : $nblinediff\x1b[0m"
 			cat bigsuperpositiontest > bigsuperpositiondifficult$i
+			echo -e "\033[0;31mMap saved in bigsuperpositiondifficult$i\x1b[0m"
 		fi
 		tot=$(($tot+$nblinediff))
 		fin=`date +%s`
