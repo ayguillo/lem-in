@@ -65,7 +65,7 @@ static void	testways(t_all *all, t_room_list *tmp)
 	clean_vu(all->map);
 	all->way = 1;
 	tmp->room->to_start = 1;
-	if ((all->new_score = all->ants + (double)bfs(tmp->room,
+	if ((all->new_score = (double)all->ants + (double)bfs(tmp->room,
 					all->end, all->way, all)) > (double)all->ants)
 	{
 		while ((ret = bfs(all->start, all->end, (all->way += 1), all)) > 0)
@@ -99,7 +99,7 @@ int			main(void)
 		return (1);
 	}
 	if (!(all.end) || !(all.start)
-			|| (all.best_score = all.ants
+			|| (all.best_score = (double)all.ants
 				+ bfs(all.start, all.end, all.way, &all)) <= all.ants)
 		ft_error(0, &all);
 	all.sol = ft_fill(&all, all.sol, all.start, all.end);
