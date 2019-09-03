@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 11:45:43 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/05/07 15:16:56 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/05/20 14:28:46 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static int		create_room(char **tab, t_room *room)
 {
 	room->name = NULL;
-	if ((ft_strchr(tab[0], '-')))
+	if (tab[0][0] == 'L' || (ft_strchr(tab[0], '-')))
 		return (0);
 	if (!(room->name = ft_strdup(tab[0])))
 		return (0);
@@ -31,12 +31,12 @@ static int		create_room(char **tab, t_room *room)
 
 static t_room	*ft_startend(char *str, t_room *room, t_all *all)
 {
-	if (room->state == OTHER && !(ft_strcmp(str, "##start")))
+	if (!all->start && room->state == OTHER && !(ft_strcmp(str, "##start")))
 	{
 		room->state = START;
 		all->start = room;
 	}
-	else if (room->state == OTHER && !(ft_strcmp(str, "##end")))
+	else if (!all->end && room->state == OTHER && !(ft_strcmp(str, "##end")))
 	{
 		room->state = END;
 		all->end = room;
@@ -58,7 +58,7 @@ static int		ft_create(char *line, t_all *all, t_room *room)
 		if (room->state == END)
 			all->end = 0;
 		ft_freeall(&room, NULL, &tmp);
-		if (!(ft_parsepipe(line, all)))
+		if (!(ft_parsepipe(&line, all)))
 			return (0);
 		return (1);
 	}
@@ -71,7 +71,7 @@ static int		ft_create(char *line, t_all *all, t_room *room)
 	return (2);
 }
 
-static int		ft_createmap(char *line, t_all *all, int retgnl)
+static int		ft_createmap(char **line, t_all *all, int retgnl)
 {
 	int		ret;
 	t_room	*room;
@@ -79,17 +79,17 @@ static int		ft_createmap(char *line, t_all *all, int retgnl)
 	if (!(room = malloc(sizeof(t_room))))
 		return (0);
 	room->state = OTHER;
-	while (retgnl > 0 && line[0] == '#')
+	while (retgnl > 0 && *line[0] == '#')
 	{
-		room = ft_startend(line, room, all);
-		all->str = ft_strjoinwtn(all->str, line, retgnl);
-		retgnl = ft_gnl(0, &line);
+		room = ft_startend(*line, room, all);
+		all->str = ft_strjoinwtn(&(all->str), line, retgnl);
+		retgnl = ft_gnl(0, line);
 	}
-	if (retgnl > 0 && line[0] != '#')
+	if (retgnl > 0 && *line[0] != '#')
 	{
-		ret = ft_create(line, all, room);
+		ret = ft_create(*line, all, room);
 		if (ret == 2)
-			all->str = ft_strjoinwtn(all->str, line, retgnl);
+			all->str = ft_strjoinwtn(&(all->str), line, retgnl);
 		return (ret);
 	}
 	return (2);
@@ -97,29 +97,29 @@ static int		ft_createmap(char *line, t_all *all, int retgnl)
 
 int				ft_parsroom(t_all *all)
 {
-	char			*line;
+	char			*l;
 	int				ret;
 
-	line = NULL;
-	if ((ret = ft_gnl(0, &line)) <= 0)
-		ft_error(line, all);
-	while (ret > 0 && line[0] == '#')
+	l = NULL;
+	if ((ret = ft_gnl(0, &l)) <= 0)
+		ft_error(l, all);
+	while (ret > 0 && l[0] == '#')
 	{
-		all->str = ft_strjoinwtn(all->str, line, ret);
-		ret = ft_gnl(0, &line);
+		all->str = ft_strjoinwtn(&(all->str), &l, ret);
+		ret = ft_gnl(0, &l);
 	}
-	if (!(line) || line[0] == 0 || ((all->ants) = ft_atoi(line)) <= 0)
-		ft_error(line, all);
-	all->str = ft_strjoinwtn(all->str, line, ret);
-	ret = ft_gnl(0, &line);
+	if (!l || l[0] == 0 || ft_getnbr(l) != 1 || ((all->ants) = ft_atoi(l)) <= 0)
+		ft_error(l, all);
+	all->str = ft_strjoinwtn(&(all->str), &l, ret);
+	ret = ft_gnl(0, &l);
 	while (ret > 0)
 	{
-		if (!(ret = ft_createmap(line, all, ret)))
-			ft_error(line, all);
+		if (!(ret = ft_createmap(&l, all, ret)))
+			ft_error(l, all);
 		else if (ret == 1)
 			return (1);
-		ret = ft_gnl(0, &line);
+		ret = ft_gnl(0, &l);
 	}
-	ft_error(line, all);
+	ft_error(l, all);
 	return (0);
 }

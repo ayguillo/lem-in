@@ -69,9 +69,11 @@ void			ft_printfinal(t_all *all, int way, int antstot, t_sol **sol)
 {
 	int		*antsway;
 	int		ants;
+	int		end;
 	int		i;
 
 	ants = 1;
+	end = 1;
 	if (!sol)
 		return ;
 	if (!(antsway = distribute(sol, way, antstot)))

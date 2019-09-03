@@ -6,7 +6,7 @@
 /*   By: vlambert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 09:38:58 by vlambert          #+#    #+#             */
-/*   Updated: 2019/04/19 16:12:06 by vlambert         ###   ########.fr       */
+/*   Updated: 2019/05/20 13:42:41 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			main(void)
 	}
 	if (!(all.end) || !(all.start)
 			|| (all.best_score = (double)all.ants
-				+ bfs(all.start, all.end, all.way, &all)) <= all.ants)
+				+ bfs(all.start, all.end, all.way, &all)) <= (double)all.ants)
 		ft_error(0, &all);
 	all.sol = ft_fill(&all, all.sol, all.start, all.end);
 	ft_printf("%s\n", all.str);
@@ -111,4 +111,5 @@ int			main(void)
 		tmp = tmp->next;
 	}
 	finish(&all);
+	return (0);
 }

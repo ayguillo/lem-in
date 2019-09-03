@@ -6,7 +6,7 @@
 /*   By: vlambert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 09:43:26 by vlambert          #+#    #+#             */
-/*   Updated: 2019/04/19 16:08:02 by vlambert         ###   ########.fr       */
+/*   Updated: 2019/05/20 14:14:21 by ayguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ typedef struct				s_all
 	int						bestway;
 }							t_all;
 
-int							ft_parsepipe(char *line, t_all *all);
+int							ft_parsepipe(char **line, t_all *all);
 t_room						*find_room(char *name, t_room_list *list);
 t_room_list					*add_room(t_room_list *list, t_room *room, int ver);
 int							ft_parsroom(t_all *all);
 t_room_list					*free_chain(t_room_list *list, int fin);
 void						ft_error(char *line, t_all *all);
-char						*ft_strjoinwtn(char *s1, char *s2, int ret);
-void						ft_del(char *s1, char *s2);
+char						*ft_strjoinwtn(char **s1, char **s2, int ret);
+void						ft_del(char **s1, char **s2);
 int							bfs(t_room *room, t_room *end, int way, t_all *all);
 t_sol						**ft_fill(t_all *all, t_sol **sol, t_room *start,
 		t_room*end);
